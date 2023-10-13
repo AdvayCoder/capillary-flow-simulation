@@ -1,0 +1,4 @@
+1 - Define Coords
+2 - Monte Carlo Simulation for one time instant
+3 - Repeating over and over again
+4 - Pairing the simulation with visuals (could do a heat map)
