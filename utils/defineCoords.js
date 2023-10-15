@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const defineCoords = (circleRadius, amountStacks) => {
     if (!Number.isInteger(circleRadius))
         throw Error('Circle Radius must be an intger');
@@ -15,15 +17,13 @@ const defineCoords = (circleRadius, amountStacks) => {
         }
     }
 
-
     for (let height = 0; height <= amountStacks; height++) {
         //adds stack key for identification later in code
-        const stackedXYArray = xyArray.map((coord) => {
+        const markedXYArray = xyArray.map((coord) => {
             return { ...coord, stack: height };
         });
 
-        coords.push(stackedXYArray);
-        
+        coords.push(markedXYArray);
     }
 
     return coords;
