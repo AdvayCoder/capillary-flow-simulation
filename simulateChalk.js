@@ -7,6 +7,7 @@ const CIRCLE_RADIUS = 50;
 const STACK_HEIGHT = 50;
 const SHOULD_LOG_DATA = true;
 const FILE_NAME = './one_chalk.json';
+const TIMES_TO_ITERATE = 100;
 
 const coords = defineCoords(CIRCLE_RADIUS, STACK_HEIGHT);
 
@@ -32,7 +33,7 @@ coords[1].forEach((coord) => {
 
 let start = Date.now();
 //one iteration
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < TIMES_TO_ITERATE; i++) {
     runIteration(
         coords,
         CIRCLE_RADIUS,
