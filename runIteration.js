@@ -3,15 +3,21 @@ const setWeight = require('./utils/setWeight');
 
 const runIteration = (coords, circleRadius, heightConst) => {
     coords.forEach((stack) => {
-        stack.forEach((currentCoord) => {
-            //console.log(currentCoord)
+        stack.forEach((currentCoord, index) => {
             const currentCoords = getCoords(coords, currentCoord, heightConst);
-            //console.log(currentCoords)
-            setWeight(currentCoords);
+            setWeight(coords, currentCoord, index, currentCoords);
         });
     });
 
     
+
+    coords.forEach((stack, stackIndex) => {
+        
+        stack.forEach((currentCoord, index) => {
+            coords[stackIndex][index].weight = currentCoord.newWeight;
+            coords[stackIndex][index].newWeight = 0;
+        });
+    });
 };
 
 module.exports = runIteration;

@@ -4,12 +4,9 @@ const getCoords = (coords, currentCoord, heightConst) => {
 
     const adjacentCoords = new Array();
 
-    //console.log(coords)
     const coordX = currentCoord.x;
     const coordY = currentCoord.y;
     const stackHeight = currentCoord.stack;
-    
-   // console.log(coordX, coordY, stackHeight)
 
     const checkArray = [
         { x: coordX - 1, y: coordY },
@@ -26,7 +23,7 @@ const getCoords = (coords, currentCoord, heightConst) => {
         });
     });
 
-    if (stackHeight > 0 && stackHeight < (heightConst - 1)) {
+    if (stackHeight > 0 && stackHeight < heightConst - 1) {
         //in middle
         coords[stackHeight + 1].forEach((coord) => {
             if (coord.x === coordX && coord.y === coordY) {
@@ -39,7 +36,7 @@ const getCoords = (coords, currentCoord, heightConst) => {
                 adjacentCoords.push(coord);
             }
         });
-    } else if (stackHeight === (heightConst - 1)) {
+    } else if (stackHeight === heightConst - 1) {
         //top layer
         coords[stackHeight - 1].forEach((coord) => {
             if (coord.x === coordX && coord.y === coordY) {
