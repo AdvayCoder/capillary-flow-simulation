@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const defineCoords = (circleRadius, amountStacks) => {
+const defineCoords = (circleRadius, amountStacks, shouldLogData) => {
     if (!Number.isInteger(circleRadius))
         throw Error('Circle Radius must be an intger');
     if (!Number.isInteger(amountStacks))
@@ -9,15 +9,20 @@ const defineCoords = (circleRadius, amountStacks) => {
     const coords = new Array();
     const xyArray = new Array();
 
+    const baseCoords = new Array();
+
     for (let y = -circleRadius; y <= circleRadius; y++) {
         for (let x = -circleRadius; x <= circleRadius; x++) {
             if (x * x + y * y <= circleRadius) {
+                if (shouldLogData === true) {
+                    baseCoords.push({ x, y });
+                }
                 xyArray.push({ x, y, weight: 0, newWeight: 0 });
             }
         }
     }
 
-    for (let height = 0; height <= amountStacks; height++) {
+    for (let height = 0; height < amountStacks; height++) {
         //adds stack key for identification later in code
         const markedXYArray = xyArray.map((coord) => {
             return { ...coord, stack: height };
@@ -26,7 +31,7 @@ const defineCoords = (circleRadius, amountStacks) => {
         coords.push(markedXYArray);
     }
 
-    return coords;
+    return { baseCoords, coords };
 };
 
 module.exports = defineCoords;

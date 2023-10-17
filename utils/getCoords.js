@@ -9,6 +9,7 @@ const getCoords = (coords, currentCoord, heightConst) => {
     const stackHeight = currentCoord.stack;
 
     const checkArray = [
+        { x: coordX, y: coordY },
         { x: coordX - 1, y: coordY },
         { x: coordX + 1, y: coordY },
         { x: coordX, y: coordY - 1 },
