@@ -11,9 +11,9 @@ const defineCoords = (circleRadius, amountStacks, shouldLogData) => {
 
     const baseCoords = new Array();
 
-    for (let y = -circleRadius; y <= circleRadius; y++) {
-        for (let x = -circleRadius; x <= circleRadius; x++) {
-            if (x * x + y * y <= circleRadius) {
+    for (let y = -(circleRadius * circleRadius); y <= circleRadius * circleRadius; y++) {
+        for (let x = -(circleRadius * circleRadius); x <= circleRadius * circleRadius; x++) {
+            if (x * x + y * y <= circleRadius * circleRadius) {
                 if (shouldLogData === true) {
                     baseCoords.push({ x, y });
                 }
