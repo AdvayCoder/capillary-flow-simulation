@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chromatography</title>
+
+        <link rel="stylesheet" href="./styles.css" />
+        <script src="./script.js" async></script>
+    </head>
+    <body>
+        <div class="info">
+        <input type="file" id="input" />
+        
+        <a target="_blank" href="https://www.github.com"><img src="./github-icon.png" ></a>
+        </div>
+        <div class="nav-container">
+            <nav>
+                <div class="control-container">
+                    <button id="prev-stack" class="nav-el">-</button>
+                    <p class="label" class="nav-el">Stack</p>
+                    <button id="next-stack" class="nav-el">+</button>
+                    <p id="stack-label" class="label nav-el"></p>
+                </div>
+                <div class="control-container">
+                    <button id="prev-iteration" class="nav-el">-</button>
+                    <p class="label" class="nav-el">Iteration</p>
+                    <button id="next-iteration" class="nav-el">+</button>
+                    <p id="iteration-label" class="label nav-el"></p>
+                </div>
+
+            </nav>
+        </div>
+        <canvas id="grid" height="1000" width="1000"></canvas>
+    </body>
+</html>
