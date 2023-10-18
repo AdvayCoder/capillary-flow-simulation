@@ -21,7 +21,6 @@ input.addEventListener('change', () => {
 
     fileReader.addEventListener('load', () => {
         simulationData = JSON.parse(fileReader.result);
-        console.log(simulationData);
         currentStack = 1;
         currentIteration = 1;
         document.getElementById('stack-label').innerText = currentStack;
@@ -77,15 +76,11 @@ const renderIteration = (iterationNumber, stackNumber) => {
 
     let checkOffset = 0;
     simulationData.coordsDefinition.forEach((coord, index) => {
-        console.log('index, check offsed', index, checkOffset);
-        console.log(coord);
-
         //if entire array is empty, renders all-red grid
         if (
             simulationData.coordsData[iterationNumber - 1][stackNumber - 1]
                 .length === 0
         ) {
-            console.log('expty array');
             ctx.fillStyle = 'rgb(0, 0, 0)';
             ctx.fillRect(
                 coord.x * DISTANCE_SCALE_FACTOR,
@@ -103,7 +98,6 @@ const renderIteration = (iterationNumber, stackNumber) => {
             ];
         if (coord.x === actualCoord.x && coord.y === actualCoord.y) {
             //render the square
-            console.log(actualCoord.weight);
             ctx.fillStyle = `rgba(0, 247, 255, ${1 * actualCoord.weight})`;
             ctx.fillRect(
                 coord.x * DISTANCE_SCALE_FACTOR,
@@ -115,7 +109,6 @@ const renderIteration = (iterationNumber, stackNumber) => {
             //this means that the actual coordinate's weight value is 0
             //render empty sqaure
             ctx.fillStyle = 'rgb(255, 0, 0)';
-            console.log(actualCoord.weight);
             ctx.fillRect(
                 coord.x * DISTANCE_SCALE_FACTOR,
                 coord.y * DISTANCE_SCALE_FACTOR,

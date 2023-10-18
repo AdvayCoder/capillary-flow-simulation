@@ -1,13 +1,11 @@
 const fs = require('fs');
 
 const logData = (fileName, data, writeStream, readStream, iterationNumber) => {
-    console.log('writing')
     fs.readFileSync(fileName, 'utf8', (err, jsonData) => {
         if (err) {
             throw Error('Error reading file');
         } else {
             const parsedJsonData = JSON.parse(jsonData);
-            console.log(parsedJsonData)
             parsedJsonData.coordsData.push([data]);
             // if (!parsedJsonData.coordsData[iterationNumber]) {
             //     parsedJsonData.coordsData.push([data]);

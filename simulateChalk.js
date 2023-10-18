@@ -20,7 +20,8 @@ const { baseCoords, coords } = defineCoords(
     SHOULD_LOG_DATA
 );
 
-const sideWaterCoordsArray = [0 ,1, 2, 7,8,9];
+//user set array
+const sideWaterCoordsArray = [0, 1, 2, 7, 8, 9];
 
 const outerCoordsArray = getOuterCoords(baseCoords);
 
@@ -43,16 +44,13 @@ let sideWaterStack = 0;
 
 for (let i = 0; i < TIMES_TO_ITERATE; i++) {
     if (i % (TIMES_TO_ITERATE / STACK_HEIGHT) === 0) {
-        
         sideWaterCoordsArray.forEach((indexVal) => {
-            console.log(indexVal)
-            const outerCoord = outerCoordsArray[indexVal]
-            coords[sideWaterStack].forEach(coord => {
-                if(coord.x === outerCoord.x && coord.y === outerCoord.y) {
+            const outerCoord = outerCoordsArray[indexVal];
+            coords[sideWaterStack].forEach((coord) => {
+                if (coord.x === outerCoord.x && coord.y === outerCoord.y) {
                     coord.weight = 1;
                 }
-            })
-            console.log('side water done')
+            });
         });
         sideWaterStack++;
     }
@@ -68,8 +66,6 @@ for (let i = 0; i < TIMES_TO_ITERATE; i++) {
         logArray.push(parsedCoords);
     }
 }
-
-console.log('log array', logArray);
 
 const writeStream = fs.createWriteStream(FILE_NAME);
 
