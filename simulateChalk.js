@@ -2,13 +2,15 @@ const fs = require('fs');
 
 const runIteration = require('./runIteration.js');
 const defineCoords = require('./utils/defineCoords.js');
-const logData = require('./utils/logData');
 const parseCoordData = require('./utils/parseCoordData');
+const getOuterCoords = require('./utils/getOuterCoords.js');
+const getUserInput = require('./utils/getUserInput.js');
 
-const CIRCLE_RADIUS = 50;
-const STACK_HEIGHT = 20;
+//user-set simulation constants
+const CIRCLE_RADIUS = 10;
+const STACK_HEIGHT = 10;
 const SHOULD_LOG_DATA = true;
-const FILE_NAME = './one_chalk.json';
+const FILE_NAME = './one_chalk-side-water-3.json';
 const TIMES_TO_ITERATE = 200;
 const TIMES_TO_LOG = 10;
 
@@ -17,6 +19,14 @@ const { baseCoords, coords } = defineCoords(
     STACK_HEIGHT,
     SHOULD_LOG_DATA
 );
+
+const sideWaterCoordsArray = [0 ,1, 2, 7,8,9];
+
+const outerCoordsArray = getOuterCoords(baseCoords);
+
+console.log(outerCoordsArray);
+
+//after prompted to do so, enter the indexes of the outer coordinates array that you want water to flow through
 
 //initial bottom layer set-up
 coords[0].forEach((coord) => {
@@ -29,7 +39,24 @@ const start = Date.now();
 
 const logArray = [];
 
+let sideWaterStack = 0;
+
 for (let i = 0; i < TIMES_TO_ITERATE; i++) {
+    if (i % (TIMES_TO_ITERATE / STACK_HEIGHT) === 0) {
+        
+        sideWaterCoordsArray.forEach((indexVal) => {
+            console.log(indexVal)
+            const outerCoord = outerCoordsArray[indexVal]
+            coords[sideWaterStack].forEach(coord => {
+                if(coord.x === outerCoord.x && coord.y === outerCoord.y) {
+                    coord.weight = 1;
+                }
+            })
+            console.log('side water done')
+        });
+        sideWaterStack++;
+    }
+
     runIteration(coords, CIRCLE_RADIUS, STACK_HEIGHT);
 
     if (
@@ -38,14 +65,13 @@ for (let i = 0; i < TIMES_TO_ITERATE; i++) {
     ) {
         //checks if it is the 'TIMES_TO_LOG'th iteration
         const parsedCoords = parseCoordData(coords);
-        logArray.push(parsedCoords)
+        logArray.push(parsedCoords);
     }
 }
 
-console.log('log array', logArray)
+console.log('log array', logArray);
 
 const writeStream = fs.createWriteStream(FILE_NAME);
-const readStream = fs.createReadStream(FILE_NAME);
 
 fs.open(FILE_NAME, 'w', (err) => {
     if (err) throw Error('Error creating file');
@@ -59,6 +85,7 @@ if (SHOULD_LOG_DATA === true) {
         circleRadius: CIRCLE_RADIUS,
         stackHeight: STACK_HEIGHT,
         iterations: TIMES_TO_ITERATE,
+        itertionInterval: TIMES_TO_ITERATE / STACK_HEIGHT,
         coordsDefinition: baseCoords,
         coordsData: logArray,
     };
