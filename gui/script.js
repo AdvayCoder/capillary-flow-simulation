@@ -81,7 +81,7 @@ const renderIteration = (iterationNumber, stackNumber) => {
             simulationData.coordsData[iterationNumber - 1][stackNumber - 1]
                 .length === 0
         ) {
-            ctx.fillStyle = 'rgb(0, 0, 0)';
+            ctx.fillStyle = 'rgb(255, 0, 0)';
             ctx.fillRect(
                 coord.x * DISTANCE_SCALE_FACTOR,
                 coord.y * DISTANCE_SCALE_FACTOR,
@@ -96,7 +96,7 @@ const renderIteration = (iterationNumber, stackNumber) => {
             simulationData.coordsData[iterationNumber - 1][stackNumber - 1][
                 index - checkOffset
             ];
-        if (coord.x === actualCoord.x && coord.y === actualCoord.y) {
+        if (coord.x === actualCoord.x && coord.y === actualCoord.y && actualCoord.weight !== 0) {
             //render the square
             ctx.fillStyle = `rgba(0, 247, 255, ${1 * actualCoord.weight})`;
             ctx.fillRect(
