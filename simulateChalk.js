@@ -10,9 +10,10 @@ const getUserInput = require('./utils/getUserInput.js');
 const CIRCLE_RADIUS = 10;
 const STACK_HEIGHT = 10;
 const SHOULD_LOG_DATA = true;
-const FILE_NAME = './one_chalk-side-water-3.json';
+const FILE_NAME = './one_chalk-side-water-10.json';
 const TIMES_TO_ITERATE = 200;
 const TIMES_TO_LOG = 10;
+const SIDE_WATER_FLOW_DECREASE = 1;
 
 const { baseCoords, coords } = defineCoords(
     CIRCLE_RADIUS,
@@ -21,7 +22,7 @@ const { baseCoords, coords } = defineCoords(
 );
 
 //user set array
-const sideWaterCoordsArray = [0, 1, 2, 7, 8, 9];
+const sideWaterCoordsArray = [0, 1, 2, 4, 5, 6, 14, 15, 16, 17, 18, 19, 20];
 
 const outerCoordsArray = getOuterCoords(baseCoords);
 
@@ -44,14 +45,16 @@ let sideWaterStack = 0;
 
 for (let i = 0; i < TIMES_TO_ITERATE; i++) {
     if (i % (TIMES_TO_ITERATE / STACK_HEIGHT) === 0) {
-        sideWaterCoordsArray.forEach((indexVal) => {
-            const outerCoord = outerCoordsArray[indexVal];
-            coords[sideWaterStack].forEach((coord) => {
-                if (coord.x === outerCoord.x && coord.y === outerCoord.y) {
-                    coord.weight = 1;
-                }
+        for (let z = sideWaterStack; z >= 0; z--) {
+            sideWaterCoordsArray.forEach((indexVal) => {
+                const outerCoord = outerCoordsArray[indexVal];
+                coords[z].forEach((coord) => {
+                    if (coord.x === outerCoord.x && coord.y === outerCoord.y) {
+                        coord.weight = 1;
+                    }
+                });
             });
-        });
+        }
         sideWaterStack++;
     }
 
