@@ -1,15 +1,6 @@
 const sortOuterCoords = (outerCoordsArray, circleRadius) => {
-    const upperArray = [];
-    const lowerArray = [];
-
-    //for coords not inlcuded in overall check
-    outerCoordsArray.forEach((coord) => {
-        if (coord.x === circleRadius && coord.y === 0) {
-            upperArray.push(coord); //right-most coord
-        } else if (coord.x === -circleRadius && coord.y === 0) {
-            lowerArray.push(coord); //left-most coord
-        }
-    });
+    const upperArray = []; //upper half of system
+    const lowerArray = []; //lower half of system
 
     for (let x = circleRadius; x > -circleRadius; x--) {
         for (let y = 0; y <= circleRadius; y++) {
