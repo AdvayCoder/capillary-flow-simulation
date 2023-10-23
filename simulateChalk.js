@@ -5,13 +5,14 @@ const defineCoords = require('./utils/defineCoords.js');
 const parseCoordData = require('./utils/parseCoordData');
 const getOuterCoords = require('./utils/getOuterCoords.js');
 const getUserInput = require('./utils/getUserInput.js');
+const sortOuterCoords = require('./utils/sortOuterCoords.js');
 
 //user-set simulation constants
 const CIRCLE_RADIUS = 10;
 const STACK_HEIGHT = 10;
 const SHOULD_LOG_DATA = true;
-const FILE_NAME = './one_chalk-side-water-10.json';
-const TIMES_TO_ITERATE = 200;
+const FILE_NAME = './one_chalk-side-water-13.json';
+const TIMES_TO_ITERATE = 500;
 const TIMES_TO_LOG = 10;
 const SIDE_WATER_FLOW_DECREASE = 1;
 
@@ -22,9 +23,14 @@ const { baseCoords, coords } = defineCoords(
 );
 
 //user set array
-const sideWaterCoordsArray = [0, 1, 2, 4, 5, 6, 14, 15, 16, 17, 18, 19, 20];
+const sideWaterCoordsArray = [
+    0, 1, 2, 4, 5, 6, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+];
 
-const outerCoordsArray = getOuterCoords(baseCoords);
+const outerCoordsArray = sortOuterCoords(
+    getOuterCoords(baseCoords),
+    CIRCLE_RADIUS
+);
 
 console.log(outerCoordsArray);
 
