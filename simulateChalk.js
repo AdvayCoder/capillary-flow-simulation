@@ -92,7 +92,7 @@ if (SHOULD_LOG_DATA === true) {
         circleRadius: CIRCLE_RADIUS,
         stackHeight: STACK_HEIGHT,
         iterations: TIMES_TO_ITERATE,
-        itertionInterval: TIMES_TO_ITERATE / TIMES_TO_ITERATE,
+        itertionInterval: TIMES_TO_ITERATE / TIMES_TO_LOG,
         coordsDefinition: baseCoords,
         coordsData: logArray,
     };
