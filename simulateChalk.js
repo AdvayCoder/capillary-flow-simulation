@@ -9,12 +9,11 @@ const sortOuterCoords = require('./utils/sortOuterCoords.js');
 
 //user-set simulation constants
 const CIRCLE_RADIUS = 10;
-const STACK_HEIGHT = 10;
+const STACK_HEIGHT = 20;
 const SHOULD_LOG_DATA = true;
-const FILE_NAME = './one_chalk-side-water-13.json';
-const TIMES_TO_ITERATE = 500;
+const FILE_NAME = './one-chalk-side-water-22.json';
+const TIMES_TO_ITERATE = 100;
 const TIMES_TO_LOG = 10;
-const SIDE_WATER_FLOW_DECREASE = 1;
 
 const { baseCoords, coords } = defineCoords(
     CIRCLE_RADIUS,
@@ -24,7 +23,7 @@ const { baseCoords, coords } = defineCoords(
 
 //user set array
 const sideWaterCoordsArray = [
-    0, 1, 2, 4, 5, 6, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+    4,5,6,7,8,    49,50,51,52,53, 12,13,  16,17,18, 24, 41, 42
 ];
 
 const outerCoordsArray = sortOuterCoords(
@@ -32,7 +31,7 @@ const outerCoordsArray = sortOuterCoords(
     CIRCLE_RADIUS
 );
 
-console.log(outerCoordsArray);
+console.log(outerCoordsArray); //!required
 
 //after prompted to do so, enter the indexes of the outer coordinates array that you want water to flow through
 
@@ -50,6 +49,7 @@ const logArray = [];
 let sideWaterStack = 0;
 
 for (let i = 0; i < TIMES_TO_ITERATE; i++) {
+    //water goes up at equal intervals
     if (i % (TIMES_TO_ITERATE / STACK_HEIGHT) === 0) {
         for (let z = sideWaterStack; z >= 0; z--) {
             sideWaterCoordsArray.forEach((indexVal) => {
@@ -76,6 +76,8 @@ for (let i = 0; i < TIMES_TO_ITERATE; i++) {
     }
 }
 
+//logging logic
+
 const writeStream = fs.createWriteStream(FILE_NAME);
 
 fs.open(FILE_NAME, 'w', (err) => {
@@ -85,12 +87,12 @@ fs.open(FILE_NAME, 'w', (err) => {
 writeStream.write('');
 
 if (SHOULD_LOG_DATA === true) {
-    console.log('data logged');
+    console.log('data logged'); //!required
     const data = {
         circleRadius: CIRCLE_RADIUS,
         stackHeight: STACK_HEIGHT,
         iterations: TIMES_TO_ITERATE,
-        itertionInterval: TIMES_TO_ITERATE / STACK_HEIGHT,
+        itertionInterval: TIMES_TO_ITERATE / TIMES_TO_ITERATE,
         coordsDefinition: baseCoords,
         coordsData: logArray,
     };
@@ -104,4 +106,4 @@ const end = Date.now();
 
 //logs how long the program took to run in seconds
 const elapsed = end - start;
-console.log(`${elapsed / 1000} sec`);
+console.log(`${elapsed / 1000} sec`); //!required
