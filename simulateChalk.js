@@ -7,12 +7,12 @@ const getOuterCoords = require('./utils/getOuterCoords.js');
 const getUserInput = require('./utils/getUserInput.js');
 const sortOuterCoords = require('./utils/sortOuterCoords.js');
 
-//user-set simulation constants
+//user-set simulation constant
 const CIRCLE_RADIUS = 10;
 const STACK_HEIGHT = 20;
 const SHOULD_LOG_DATA = true;
-const FILE_NAME = './one-chalk-side-water-22.json';
-const TIMES_TO_ITERATE = 100;
+const FILE_NAME = './data/chalk-final-demo-2.json';
+const TIMES_TO_ITERATE = 500;
 const TIMES_TO_LOG = 10;
 
 const { baseCoords, coords } = defineCoords(
@@ -23,7 +23,7 @@ const { baseCoords, coords } = defineCoords(
 
 //user set array
 const sideWaterCoordsArray = [
-    4,5,6,7,8,    49,50,51,52,53, 12,13,  16,17,18, 24, 41, 42
+    1,2,3, 23,24, 45
 ];
 
 const outerCoordsArray = sortOuterCoords(
@@ -31,7 +31,7 @@ const outerCoordsArray = sortOuterCoords(
     CIRCLE_RADIUS
 );
 
-console.log(outerCoordsArray); //!required
+console.log(outerCoordsArray); //! required
 
 //after prompted to do so, enter the indexes of the outer coordinates array that you want water to flow through
 
@@ -50,6 +50,9 @@ let sideWaterStack = 0;
 
 for (let i = 0; i < TIMES_TO_ITERATE; i++) {
     //water goes up at equal intervals
+
+    
+
     if (i % (TIMES_TO_ITERATE / STACK_HEIGHT) === 0) {
         for (let z = sideWaterStack; z >= 0; z--) {
             sideWaterCoordsArray.forEach((indexVal) => {
@@ -63,6 +66,7 @@ for (let i = 0; i < TIMES_TO_ITERATE; i++) {
         }
         sideWaterStack++;
     }
+
 
     runIteration(coords, CIRCLE_RADIUS, STACK_HEIGHT);
 
