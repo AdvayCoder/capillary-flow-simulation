@@ -1,13 +1,33 @@
+/* Fonts */
+@font-face {
+    font-family: "Merriweather";
+    src: url("./fonts/Merriweather-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Merriweather Bold Italic";
+    src: url("./fonts/Merriweather-BoldItalic.ttf");
+}
+
 * {
     box-sizing: border-box;
     display: block;
     color: white;
+    font-family: "Merriweather", serif;
+}
+
+/* The title glitches and shows up in the body - so this effectively removes it */
+title {
+    width: 0;
+    height: 0;
+    visibility: hidden;
 }
 
 body {
     display: block;
     background-color: black;
 }
+
 .info {
     display: flex;
     justify-content: space-between;
@@ -22,21 +42,23 @@ canvas {
     position: absolute;
     top: 150px;
     border: 5px solid black;
+    margin: auto;
 }
 
 .control-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 300px;
+    width: 230px;
     height: 30px;
-    margin: 0px 20px;
+    margin: 0px 50px;
 }
 
 .label {
     margin-left: 5px;
     margin-right: 5px;
     color: white;
+    font-family: "Merriweather Bold Italic";
 }
 
 .nav-el{
@@ -44,11 +66,14 @@ canvas {
     margin: 5px;
 }
 
-p {
-    width: 1rem;
-}
-
 button {
-    width: .5rem;
+    width: 1.5rem;
+    height: 1.5rem;
     color: black;
+    background-color: #EFEFEF;
+    border: none;
+    border-radius: 20;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 800;
 }

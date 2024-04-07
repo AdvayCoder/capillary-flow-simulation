@@ -4,8 +4,8 @@ const ctx = document.getElementById('grid').getContext('2d');
 
 const GRID_WIDTH = canvas.width;
 const GRID_HEIGHT = canvas.height;
-const DISTANCE_SCALE_FACTOR = 40;
-const SQUARE_SIZE = 30;
+const DISTANCE_SCALE_FACTOR = 30;
+const SQUARE_SIZE = 23;
 
 let currentStack = 1;
 let currentIteration = 1;
